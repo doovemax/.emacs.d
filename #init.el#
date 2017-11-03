@@ -76,7 +76,7 @@
 
 ;;设置默认主题
 (load-theme 'monokai t)
-
+ 
 ;;开启hungry-delete
 (require 'hungry-delete)
 (global-hungry-delete-mode)
