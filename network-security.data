@@ -1,0 +1,4 @@
+(
+ (:id "sha1:ccfd2cc2a08c89a9b10969be8c1e926954d53e28" :fingerprint "sha1:af:34:b7:4a:31:aa:9f:c7:89:f6:d6:3f:a4:0d:1f:6c:0b:d8:ad:52" :host "stable.melpa.org:443" :conditions (:insecure :unknown-ca :invalid))
+ (:id "sha1:7069e85d6f0a077711a5ff7a558e31f5e58c249a" :fingerprint "sha1:60:45:ad:2a:3d:95:78:0a:f9:86:2b:0e:c1:39:b1:41:ab:95:35:a6" :host "elpa.popkit.org:443" :conditions (:insecure :unknown-ca :invalid))
+)

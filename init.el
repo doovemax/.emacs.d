@@ -5,9 +5,12 @@
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
 ;;添加MELPA源
-(require 'package)
-(package-initialize)
-(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+;;(require 'package)
+;;(package-initialize)
+;;(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+;; 添加国内源
+(add-to-list 'package-archives
+            '("popkit" . "https://elpa.popkit.org/packages/"))
 ;;定义默认安装的软件包
 ;; Add Packages
 (require 'cl)
@@ -19,6 +22,7 @@
 		jedi
 		swiper
 		counsel
+		popwin
 		;; solarized-theme
 		) "Default packages")
 
@@ -43,7 +47,6 @@
 (linum-mode t)
 ;;关闭启动画面
 (setq inhibit-splash-screen t)
-
 ;;定义打开配置文件
 (defun open-my-init-file()
   (interactive)
@@ -94,3 +97,26 @@
 (global-set-key (kbd "<f1> l") 'counsel-find-library)
 ;;等待多长时间自动补全
 (setq company-idle-delay 0.2)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (popwin company hungry-delete monokai-theme jedi swiper counsel))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+;;光标自动切换到新窗口
+(popwin-mode t)
+
+;;设置补全选择快捷键
+(with-eval-after-load 'company
+  (define-key company-active-map (kbd "M-n") nil)
+  (define-key company-active-map (kbd "M-p") nil)
+  (define-key company-active-map (kbd "C-n") #'company-select-next)
+  (define-key company-active-map (kbd "C-p") #'company-select-previous))
