@@ -1,16 +1,14 @@
-
-
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
 ;;添加MELPA源
-;;(require 'package)
-;;(package-initialize)
-;;(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
-;; 添加国内源
+(require 'package)
 (add-to-list 'package-archives
             '("popkit" . "https://elpa.popkit.org/packages/"))
+;;(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(package-initialize)
+;; 添加国内源
 ;;定义默认安装的软件包
 ;; Add Packages
 (require 'cl)
@@ -23,6 +21,8 @@
 		swiper
 		counsel
 		popwin
+		powerline
+		window-numbering
 		;; solarized-theme
 		) "Default packages")
 
@@ -104,7 +104,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (popwin company hungry-delete monokai-theme jedi swiper counsel))))
+    (company hungry-delete monokai-theme jedi swiper counsel))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -112,6 +112,7 @@
  ;; If there is more than one, they won't work right.
  )
 ;;光标自动切换到新窗口
+(require 'popwin)
 (popwin-mode t)
 
 ;;设置补全选择快捷键
@@ -120,3 +121,10 @@
   (define-key company-active-map (kbd "M-p") nil)
   (define-key company-active-map (kbd "C-n") #'company-select-next)
   (define-key company-active-map (kbd "C-p") #'company-select-previous))
+
+;;开启 window-numbering 快捷选择窗口
+(window-numbering-mode 1)
+
+;; 开启 powerline
+(require 'powerline)
+(powerline-default-theme)
