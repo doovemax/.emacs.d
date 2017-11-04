@@ -8,6 +8,31 @@
 (require 'package)
 (package-initialize)
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+;;定义默认安装的软件包
+;; Add Packages
+(require 'cl)
+ (defvar doovemax/packages '(
+		;; --- Auto-completion ---
+		company
+		hungry-delete
+		monokai-theme
+		jedi
+		swiper
+		counsel
+		;; solarized-theme
+		) "Default packages")
+
+(setq package-selected-packages doovemax/packages)
+(defun doovemax/packages-installed-p()
+  (loop for pkg in doovemax/packages
+	when (not (package-installed-p pkg)) do (return nil)
+	finally (return t)))
+(unless (doovemax/packages-installed-p)
+  (message "%s" "Refreshing package database...")
+  (package-refresh-contents)
+  (dolist (pkg doovemax/packages)
+    (when (not (package-installed-p pkg))
+      (package-install pkg))))
 ;;关闭工具栏
 (tool-bar-mode -1)
 ;;关闭右侧滚动条
@@ -48,31 +73,6 @@
 ;;高亮当前行
 ;;(global-hl-line-mode t)
 
-;;定义默认安装的软件包
-;; Add Packages
-(require 'cl)
- (defvar doovemax/packages '(
-		;; --- Auto-completion ---
-		company
-		hungry-delete
-		monokai-theme
-		jedi
-		swiper
-		counsel
-		;; solarized-theme
-		) "Default packages")
-
-(setq package-selected-packages doovemax/packages)
-(defun doovemax/packages-installed-p()
-  (loop for pkg in doovemax/packages
-	when (not (package-installed-p pkg)) do (return nil)
-	finally (return t)))
-(unless (doovemax/packages-installed-p)
-  (message "%s" "Refreshing package database...")
-  (package-refresh-contents)
-  (dolist (pkg doovemax/packages)
-    (when (not (package-installed-p pkg))
-      (package-install pkg))))
 
 ;;设置默认主题
 (load-theme 'monokai t)
@@ -93,4 +93,4 @@
 (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
 (global-set-key (kbd "<f1> l") 'counsel-find-library)
 ;;等待多长时间自动补全
-(company-idle-delay 0.3)
+(setq company-idle-delay 0.2)
